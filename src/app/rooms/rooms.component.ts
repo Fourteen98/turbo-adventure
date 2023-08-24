@@ -1,13 +1,14 @@
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'room-root',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements DoCheck, AfterViewInit, AfterViewChecked{
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked{
   hotelName = 'hotelinventoryapp';
   numberOfRooms = 10;
 
@@ -17,58 +18,17 @@ export class RoomsComponent implements DoCheck, AfterViewInit, AfterViewChecked{
     totalRooms: 20
   }
 
-  roomList: RoomList[] = [
-    {
-      roomNumber: 1,
-      roomType: 'Deluxe Room',
-      amenities: "Air Conditionr, Free Wi-Fi, Tv, Bathroom, Kitchen",
-      price: 500,
-      photos: "https://unsplash.com/photos/s4yfYIz964U",
-      checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Dec-2021'),
-      rating: 4.5
-    },
-    {
-      roomNumber: 2,
-      roomType: 'Deluxe Room',
-      amenities: "Air Conditionr, Free Wi-Fi, Tv, Bathroom, Kitchen",
-      price: 500,
-      photos: "https://unsplash.com/photos/s4yfYIz964U",
-      checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Dec-2021'),
-      rating: 4.5
-    },
-    {
-      roomNumber: 3,
-      roomType: 'Deluxe Room',
-      amenities: "Air Conditionr, Free Wi-Fi, Tv, Bathroom, Kitchen",
-      price: 1000,
-      photos: "https://unsplash.com/photos/s4yfYIz964U",
-      checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Dec-2021'),
-      rating: 4.5
-    },
-    {
-      roomNumber: 4,
-      roomType: 'Deluxe Room',
-      amenities: "Air Conditionr, Free Wi-Fi, Tv, Bathroom, Kitchen",
-      price: 1000,
-      photos: "https://unsplash.com/photos/s4yfYIz964U",
-      checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Dec-2021'),
-      rating: 4.5
-    },
-    {
-      roomNumber: 5,
-      roomType: 'Private Room',
-      amenities: "Air Conditionr, Free Wi-Fi, Tv, Bathroom, Kitchen",
-      price: 1000,
-      photos: "https://unsplash.com/photos/s4yfYIz964U",
-      checkinTime: new Date('11-Nov-2021'),
-      checkoutTime: new Date('12-Dec-2021'),
-      rating: 4.5
-    }
-  ];
+  roomList: RoomList[] = [];
+
+  // roomsService = new RoomsService(); // mostly dont do this
+
+  constructor(private roomsService: RoomsService) {
+
+  }
+
+  ngOnInit(): void {
+    this.roomList = this.roomsService.getRooms();
+  }
 
   title : string = "Room List";
   selectedRoom!: RoomList
