@@ -66,11 +66,35 @@ export class RoomsComponent {
       checkinTime: new Date('11-Nov-2021'),
       checkoutTime: new Date('12-Dec-2021'),
       rating: 4.5
-    },
-  ]
+    }
+  ];
 
+  title : string = "Room List";
+  selectedRoom!: RoomList
   hideRooms = false;
   toggle() {
     this.hideRooms = !this.hideRooms;
+    this.title = "Rooms List"
+  }
+
+  selectRoom(room: RoomList) {
+    this.selectedRoom = room;
+    console.log(this.selectedRoom);
+  }
+
+  addRoom() {
+    console.log('Add room called')
+    const room: RoomList = {
+      roomNumber: 6,
+      roomType: 'Best Suite Room',
+      amenities: "Air Conditionr, Free Wi-Fi, Tv, Bathroom, Kitchen",
+      price: 1000,
+      photos: "https://unsplash.com/photos/s4yfYIz964U",
+      checkinTime: new Date('11-Nov-2021'),
+      checkoutTime: new Date('12-Dec-2021'),
+      rating: 4.9
+    }
+    // this.roomList.push(room);
+    this.roomList = [...this.roomList, room]
   }
 }
