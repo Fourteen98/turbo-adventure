@@ -15,6 +15,7 @@
       <th>Room Price</th>
       <th>Room Amenities</th>
       <th>Checkin Time</th>
+      <th>Rating</th>
     </tr>
     <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e=even; let o=odd; let i=index;">
       <td>{{i}}</td>
@@ -23,7 +24,8 @@
       <td>{{room.roomType}}</td>
       <td>{{room.price}}</td>
       <td>{{room.amenities}}</td>
-      <td>{{room.checkinTime}}</td>
+      <td>{{room.checkinTime | date}}</td>
+      <td>{{room.rating | number}}</td>
     </tr>
   </table>
 
