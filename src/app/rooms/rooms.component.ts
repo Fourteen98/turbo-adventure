@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnDestroy, ViewChild } from '@angular/core';
 import { Room, RoomList } from './rooms';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'room-root',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent {
+export class RoomsComponent implements DoCheck, AfterViewInit, AfterViewChecked{
   hotelName = 'hotelinventoryapp';
   numberOfRooms = 10;
 
@@ -96,5 +97,19 @@ export class RoomsComponent {
     }
     // this.roomList.push(room);
     this.roomList = [...this.roomList, room]
+  }
+
+  ngDoCheck(): void {
+      console.log("onChanges is called!  ")
+  }
+
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+
+  ngAfterViewInit(): void {
+    // this.headerComponent.title = "Rooms View";
+  }
+
+  ngAfterViewChecked(): void {
+    this.headerComponent.title = "Rooms View";
   }
 }
